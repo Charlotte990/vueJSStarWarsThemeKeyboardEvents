@@ -14,13 +14,13 @@
         <img src="../../static/stormtrooper.png" style="height: 20em;">
       </div>
       <div>
-        <button id="C3PO" class="button" @click="characters('67')">C</button>
+        <button id="C3PO" :class="{ activeClass: cActive }" class="button" @click="characters('67')">C</button>
       </div>
       <div>
-        <button id="Darth" class="button" @click="characters('68')">D</button>
+        <button id="Darth" :class="{ activeClass: dActive }" class="button" @click="characters('68')">D</button>
       </div>
       <div>
-        <button id="Storm" class="button" @click="characters('83')">S</button>
+        <button id="Storm" :class="{ activeClass: sActive }" class="button" @click="characters('83')">S</button>
       </div>
     </div>
     <div class="item-c"><p class="insta">INSTAGRAM: @charlottejewer</p></div>
@@ -29,7 +29,13 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      cActive: false,
+      dActive: false,
+      sActive: false
+    }
+  },
   created: function () {
     window.addEventListener('keyup', this.characters, event)
   },
@@ -44,35 +50,25 @@ export default {
       console.log('Letter id is: ', event.keyCode)
       if (event.keyCode === 67 || event === '67') {
         c3po.play()
-        document.getElementById('C3PO').style.backgroundColor = 'gold'
-        document.getElementById('C3PO').style.color = 'black'
-        document.getElementById('Darth').style.backgroundColor = 'black'
-        document.getElementById('Storm').style.backgroundColor = 'black'
-        document.getElementById('Darth').style.color = 'gold'
-        document.getElementById('Storm').style.color = 'gold'
+        this.cActive = true
+        var vm = this
+        setTimeout(function () {
+          vm.cActive = false
+        }, 2000)
       } else if (event.keyCode === 68 || event === '68') {
         darth.play()
-        document.getElementById('Darth').style.backgroundColor = 'gold'
-        document.getElementById('Darth').style.color = 'black'
-        document.getElementById('C3PO').style.backgroundColor = 'black'
-        document.getElementById('C3PO').style.color = 'gold'
-        document.getElementById('Storm').style.backgroundColor = 'black'
-        document.getElementById('Storm').style.color = 'gold'
+        this.dActive = true
+        var vmm = this
+        setTimeout(function () {
+          vmm.dActive = false
+        }, 2000)
       } else if (event.keyCode === 83 || event === '83') {
         storm.play()
-        document.getElementById('Storm').style.backgroundColor = 'gold'
-        document.getElementById('Storm').style.color = 'black'
-        document.getElementById('C3PO').style.backgroundColor = 'black'
-        document.getElementById('C3PO').style.color = 'gold'
-        document.getElementById('Darth').style.backgroundColor = 'black'
-        document.getElementById('Darth').style.color = 'gold'
-      } else {
-        document.getElementById('Storm').style.backgroundColor = 'black'
-        document.getElementById('Storm').style.color = 'gold'
-        document.getElementById('C3PO').style.backgroundColor = 'black'
-        document.getElementById('C3PO').style.color = 'gold'
-        document.getElementById('Darth').style.backgroundColor = 'black'
-        document.getElementById('Darth').style.color = 'gold'
+        this.sActive = true
+        var vmn = this
+        setTimeout(function () {
+          vmn.sActive = false
+        }, 2000)
       }
     }
   }
@@ -158,5 +154,9 @@ export default {
   padding-top: 0.6em;
   margin-left: auto;
   margin-right: auto;
+}
+.activeClass {
+  background-color: gold;
+  color: black;
 }
 </style>
