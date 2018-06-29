@@ -123,9 +123,6 @@ export default {
   height: 100%;
   width: 100%;
 }
-.inner-grid > div {
-  color: white;
-}
 .button {
     background-color: black;
     border: 2px solid gold;
